@@ -1,9 +1,9 @@
 {
   "_class": "group",
-  "do_objectID": "B3A73B2B-F0C7-4FEC-BC10-C8A454EB61F8",
+  "do_objectID": "883EB387-DAB4-4993-AD6A-E157033E0FDE",
   "exportOptions": {
     "_class": "exportOptions",
-    "do_objectID": "21D8FB69-E2DC-44C1-9B33-2B4C394D8937",
+    "do_objectID": "8F61347F-690C-495C-AC91-19D2F616BA36",
     "exportFormats": [
     ],
     "includedLayerIds": [
@@ -14,8 +14,8 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "do_objectID": "61C1EDE4-AF8E-47E4-BDF0-0C770FB88FA0",
-    "height": 81,
+    "do_objectID": "DAEDE0E6-7CD2-4995-9F0C-13118719F8DF",
+    "height": 1136,
     "width": 640,
     "x": 0,
     "y": 0
@@ -24,32 +24,35 @@
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
-  "isVisible": true,
+  "isVisible": false,
   "layerListExpandedType": 0,
   "layers": [
     {
-      "class": "group",
-      "id": "A6647064-8D1F-4BFD-8114-D29955A160B5"
+      "class": "shapeGroup",
+      "id": "1F1E635B-0303-4AD3-AFD8-C4EB8D8EA566"
     },
     {
-      "class": "group",
-      "id": "2D35510A-FA32-40F7-A4F1-22633BE96C76"
+      "class": "shapeGroup",
+      "id": "9B210DC2-DEC2-4021-BE5A-E6344EC2C7CE"
     },
     {
       "class": "text",
-      "id": "8E91CBDB-ED78-496A-A39F-49A42D5D77E8"
+      "id": "AB4F770F-810A-4EA5-A443-5C2DA3B9462D"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "C0144CBC-BCB9-4858-9ACF-3485A686C856"
     }
   ],
-  "name": "Nav Bar",
+  "name": "반납할때",
   "nameIsFixed": true,
-  "originalObjectID": "871C9202-DE61-45CC-8844-FECC7B5D491E",
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,
   "shouldBreakMaskChain": false,
   "style": {
     "_class": "style",
-    "do_objectID": "4892D148-4A21-415C-AABA-CAD5EE0933CE",
+    "do_objectID": "394E477A-0F44-42DA-AE4B-3566CE648328",
     "endDecorationType": 0,
     "miterLimit": 10,
     "startDecorationType": 0

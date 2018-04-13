@@ -1,6 +1,6 @@
 {
-  "_class": "group",
-  "do_objectID": "BDF99B7C-2CFC-4E3C-8CFB-78FE98B3EEBC",
+  "_class": "symbolInstance",
+  "do_objectID": "01DDEED4-6CCF-458B-B514-3D4E92B248CE",
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
@@ -13,37 +13,34 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 1098,
+    "height": 98,
     "width": 640,
     "x": 0,
-    "y": 79
+    "y": 0
   },
-  "hasClickThrough": false,
+  "horizontalSpacing": 0,
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
-  "layers": [
-    {
-      "class": "group",
-      "id": "F82FA0DA-C9B2-4F94-80AE-39A6BE6F9FCE"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "01DDEED4-6CCF-458B-B514-3D4E92B248CE"
-    }
+  "layerListExpandedType": 0,
+  "name": "Website Header",
+  "nameIsFixed": false,
+  "overrideValues": [
   ],
-  "name": "빌릴때",
-  "nameIsFixed": true,
+  "overrides": {
+  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,
+  "scale": 1,
   "shouldBreakMaskChain": false,
   "style": {
     "_class": "style",
     "endDecorationType": 0,
     "miterLimit": 10,
     "startDecorationType": 0
-  }
+  },
+  "symbolID": "D8412851-AEAA-46DB-BF71-06F2FC5917D2",
+  "verticalSpacing": 0
 }

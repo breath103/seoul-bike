@@ -1,7 +1,7 @@
 {
   "_class": "shapeGroup",
   "clippingMaskMode": 0,
-  "do_objectID": "597C7F99-719B-48B9-9757-257754273DF8",
+  "do_objectID": "B1645804-6A9C-4916-B60C-56CEB7904949",
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
@@ -14,10 +14,10 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 778,
-    "width": 640,
+    "height": 2,
+    "width": 640.0000000000001,
     "x": 0,
-    "y": 179
+    "y": 96
   },
   "hasClickThrough": false,
   "hasClippingMask": false,
@@ -28,11 +28,11 @@
   "layerListExpandedType": 1,
   "layers": [
     {
-      "class": "rectangle",
-      "id": "605BBF4F-D18B-4F16-92C6-C25856A6F05C"
+      "class": "shapePath",
+      "id": "A5FF457C-A4F4-4778-AF1C-E7D8811B2DC1"
     }
   ],
-  "name": "Rectangle 2",
+  "name": "Line",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,
@@ -40,19 +40,27 @@
   "shouldBreakMaskChain": false,
   "style": {
     "_class": "style",
+    "borderOptions": {
+      "_class": "borderOptions",
+      "dashPattern": [
+      ],
+      "isEnabled": false,
+      "lineCapStyle": 2,
+      "lineJoinStyle": 0
+    },
     "borders": [
       {
         "_class": "border",
         "color": {
           "_class": "color",
-          "alpha": 1,
-          "blue": 0.592,
-          "green": 0.592,
-          "red": 0.592
+          "alpha": 0.1625905797101449,
+          "blue": 0,
+          "green": 0,
+          "red": 0
         },
         "fillType": 0,
         "isEnabled": true,
-        "position": 1,
+        "position": 0,
         "thickness": 1
       }
     ],
@@ -67,13 +75,8 @@
           "green": 0.847,
           "red": 0.847
         },
-        "fillType": 4,
-        "image": {
-          "_class": "MSJSONFileReference",
-          "_ref": "images/d830b3890df590677f6e4a620cf3d2e5955ea784",
-          "_ref_class": "MSImageData"
-        },
-        "isEnabled": true,
+        "fillType": 0,
+        "isEnabled": false,
         "noiseIndex": 0,
         "noiseIntensity": 0,
         "patternFillType": 1,
