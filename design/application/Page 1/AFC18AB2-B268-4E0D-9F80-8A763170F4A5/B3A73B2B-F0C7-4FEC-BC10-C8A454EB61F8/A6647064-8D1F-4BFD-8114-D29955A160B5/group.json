@@ -1,0 +1,53 @@
+{
+  "_class": "group",
+  "do_objectID": "A6647064-8D1F-4BFD-8114-D29955A160B5",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "62328D50-0C70-4254-9C7E-4795A64E6839",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "D95BA88E-ECAC-403B-A87F-287D3443647D",
+    "height": 81,
+    "width": 640,
+    "x": 0,
+    "y": 0
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "555D91E2-13CD-49C0-A0C0-96A2F1128331"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "4A4AEF89-58B9-451D-A967-B02476E6E909"
+    }
+  ],
+  "name": "Nav Bar Background",
+  "nameIsFixed": true,
+  "originalObjectID": "1DF1F895-8933-412C-8128-74B4E02B614A",
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "B7D0EF58-AB81-4977-9751-6D41A4B91029",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

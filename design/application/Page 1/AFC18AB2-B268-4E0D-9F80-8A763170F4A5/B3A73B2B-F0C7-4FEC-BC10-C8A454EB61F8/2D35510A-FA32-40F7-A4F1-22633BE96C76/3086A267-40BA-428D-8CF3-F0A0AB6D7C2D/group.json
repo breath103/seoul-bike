@@ -1,0 +1,65 @@
+{
+  "_class": "group",
+  "do_objectID": "3086A267-40BA-428D-8CF3-F0A0AB6D7C2D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "6657C741-2B71-46EF-A88A-99C1C78E8AC2",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "6853CC5D-5735-404D-A0A6-18161B45CED7",
+    "height": 11.13924050632911,
+    "width": 67,
+    "x": 13,
+    "y": 15.18987341772152
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "CB0AEA8C-6844-4722-AECD-CCBFC768D702"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "4F0F4C18-7B45-48AD-9E6A-EBA6FD83A5C7"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "056AE210-81F5-4337-86FE-49517BFA33EF"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "541DAFED-D7CB-4F52-AE50-BB12DC3E25F6"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "5D501B1C-0999-4740-826D-734651C8D1E6"
+    }
+  ],
+  "name": "Signal",
+  "nameIsFixed": true,
+  "originalObjectID": "F4A53CF1-3C8D-4602-B23F-52CD2F4CC65A",
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "BCD84128-03FA-4851-B0BD-3CC925065B10",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "_class": "shapeGroup",
+  "clippingMaskMode": 0,
+  "do_objectID": "49E465A8-5B37-4B5E-A59A-AADE47B85894",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "03F801D6-BD94-4314-ADA8-82EFD292E742",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "6C2905B1-ABC1-4FD8-A2AD-EB19EAE045B0",
+    "height": 26.32911392405063,
+    "width": 15,
+    "x": 494,
+    "y": 7.088607594936709
+  },
+  "hasClickThrough": true,
+  "hasClippingMask": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapePath",
+      "id": "4F8C0609-C85C-404D-8FC3-556B59493EAB"
+    },
+    {
+      "class": "shapePath",
+      "id": "305A0417-E5FE-4224-A75F-E3FAA3EFE2A6"
+    },
+    {
+      "class": "shapePath",
+      "id": "59426BCB-B009-4D3B-85C9-6BCB84A2FC3E"
+    }
+  ],
+  "name": "Bluetooth Icon",
+  "nameIsFixed": true,
+  "originalObjectID": "956AF769-8ABD-4F32-8DD3-6DD99F3150A9",
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "borders": [
+      {
+        "_class": "border",
+        "color": {
+          "_class": "color",
+          "alpha": 1,
+          "blue": 0.592,
+          "green": 0.592,
+          "red": 0.592
+        },
+        "fillType": 0,
+        "isEnabled": false,
+        "position": 0,
+        "thickness": 1
+      }
+    ],
+    "contextSettings": {
+      "_class": "graphicsContextSettings",
+      "blendMode": 0,
+      "do_objectID": "6D910255-EB71-463F-9F32-527A884EC555",
+      "opacity": 0.45
+    },
+    "do_objectID": "FC8E536A-5F70-4E31-A4FD-A92C8E77364D",
+    "endDecorationType": 0,
+    "fills": [
+      {
+        "_class": "fill",
+        "color": {
+          "_class": "color",
+          "alpha": 1,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "fillType": 0,
+        "isEnabled": true,
+        "noiseIndex": 0,
+        "noiseIntensity": 0,
+        "patternFillType": 0,
+        "patternTileScale": 1
+      }
+    ],
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "windingRule": 1
+}
