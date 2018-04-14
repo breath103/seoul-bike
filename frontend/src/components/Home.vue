@@ -25,9 +25,9 @@
            @mouseover="activateList()"
            @touchstart="activateList()">
         <div class="stationListHeader">
-          <span class="listTitle">내 주변</span>
-          <div>
-            <span class="description">
+          <div class="listTitle">내 주변</div>
+          <div class="description">
+            <div>
               <span v-if="position">
                 {{ position.coordinates.longitude.toFixed(4) }}, 
                 {{ position.coordinates.latitude.toFixed(4) }}
@@ -35,8 +35,11 @@
               <span v-if="!position">
                 위치 확인중...
               </span>
-            </span>
-            <span class="updateIndicator"></span>
+            </div>
+            <div>
+              <span class="updateIndicator"></span>
+              <span>{{ this.allStationsUpdatedAt | fromNow }}</span>
+            </div>
           </div>
         </div>
         <div class="stationListBody">
@@ -67,6 +70,7 @@ import * as _ from 'lodash';
 import Vue from 'vue';
 import * as geolib from 'geolib';
 import * as axios from 'axios';
+import * as moment from 'moment';
 
 const sample = require('./sample.json')
 // const allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
@@ -90,6 +94,7 @@ export default {
     this.position = this.getLastPosition();
     this.focus = "map";
     this.allStations = [];
+    this.allStationsUpdatedAt = null;
   },
   mounted() {
     navigator.geolocation.watchPosition(
@@ -127,7 +132,10 @@ export default {
         lat: coordinate.latitude,
         lng: coordinate.longitude,
       }
-    }
+    },
+    fromNow(timestamp) {
+      return moment(timestamp).fromNow();
+    },
   },
   methods: {
     distanceToMe(coordinate) {
@@ -172,6 +180,7 @@ export default {
       axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
         .then((response) => {
           this.allStations = response.data.stations;
+          this.allStationsUpdatedAt = response.data.meta.createdAt;
         });
     },
     activateMap() {
@@ -201,6 +210,7 @@ export default {
     return {
       position: this.position,
       allStations: this.allStations,
+      allStationsUpdatedAt: this.allStationsUpdatedAt,
       focus: this.focus,
     }
   }
@@ -259,7 +269,8 @@ $highlightColor: #FF6E30;
   border-bottom: 1px solid black;
   padding: 9px 12px;
   display: flex;
-  align-items: baseline;
+
+  // align-items: baseline;
   
   .listTitle {
     font-size: 28px;
@@ -281,7 +292,6 @@ $highlightColor: #FF6E30;
     display: inline-block;
     width: 0.4em;
     height: 0.4em;
-    margin: 0.1em;
     
     background-color: $highlightColor;
     border-radius: 50%;
@@ -293,7 +303,7 @@ $highlightColor: #FF6E30;
   }  
 
   .description {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
 
     margin-left: 10px;

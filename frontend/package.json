@@ -16,6 +16,7 @@
     "firebase-tools": "^3.18.4",
     "geolib": "^2.0.24",
     "lodash": "^4.17.5",
+    "moment": "^2.22.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue2-google-maps": "^0.8.12"
