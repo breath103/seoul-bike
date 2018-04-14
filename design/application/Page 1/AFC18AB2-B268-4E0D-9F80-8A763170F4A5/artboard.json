@@ -86,6 +86,38 @@
     {
       "class": "group",
       "id": "B3A73B2B-F0C7-4FEC-BC10-C8A454EB61F8"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "F4D0C181-B25D-4008-90D1-20D27ECFFE40"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "3601172B-6FF9-4231-9711-3D028C36B486"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "3182BBDA-B378-4A51-85F3-5630D945E915"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "25CE2AF9-A50A-467E-A79C-3B698C7A66D3"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "BDA99CDD-DAA7-4B82-8250-683DE9936F3E"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "E8417FE4-E1F4-4FBF-B4CB-DF380E9E544C"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "836F1030-8373-4C5E-BB78-E9B7B47B1CDD"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "90B8964A-F9E0-47DB-BA8C-46EF36E27F0B"
     }
   ],
   "name": "Mobile Safari Scrolled",

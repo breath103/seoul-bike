@@ -1,0 +1,49 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "E8417FE4-E1F4-4FBF-B4CB-DF380E9E544C",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "B5D47566-3622-46AE-9F94-0B0D599CC227",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "2650A0CB-A8D3-4F5B-B5F9-2AA0FE7CEC12",
+    "height": 34,
+    "width": 34,
+    "x": 424,
+    "y": 254
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Station Icon",
+  "nameIsFixed": false,
+  "overrideValues": [
+  ],
+  "overrides": {
+  },
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "7F3FE74A-AEBB-44FA-9FAB-44BFCD6730D6",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "BAEBC7DC-FD2D-4244-A856-0CB41172A5A3",
+  "verticalSpacing": 0
+}
