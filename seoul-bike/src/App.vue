@@ -29,6 +29,12 @@ body, html {
 }
 
 main {
+  position: fixed;
+  left: 0;
+  top: 56px;
+  bottom: 0;
+  right: 0;
+  overflow: scroll;
 }
 
 header {

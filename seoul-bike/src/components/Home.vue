@@ -3,15 +3,24 @@
     <div class="map">
 
     </div>
-    <div v-if="position">
-      {{ JSON.stringify(position.coordinates) }}
-    </div>
     <div class="stationList">
       <div class="stationListHeader">
-        Around You
+        <span class="listTitle">내 주변</span>
+        <div>
+          <span class="description">
+            <span v-if="position">
+              {{ position.coordinates.longitude.toFixed(4) }}, 
+              {{ position.coordinates.latitude.toFixed(4) }}
+            </span>
+            <span v-if="!position">
+              위치 확인중...
+            </span>
+          </span>
+          <span class="updateIndicator"></span>
+        </div>
       </div>
       <div class="stationListBody">
-        <div class="stationListItem" v-for="item in closeStations">
+        <div class="stationListItem" :key="item.name" v-for="item in closeStations">
           <div class="name" >
             {{ item.station.name }}
           </div>
@@ -54,26 +63,29 @@ const allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(
 export default {
   name: 'Home',
   created() {
-    const lastPosition = localStorage.getItem("LastPosition");
-    if (lastPosition) {
-      this.position = JSON.parse(lastPosition);
-    } else {
-      this.position = null;
-    }
+    this.position = this.getLastPosition();
   },
   mounted() {
     navigator.geolocation.watchPosition(
-      (position) => {
-        localStorage.setItem("LastPosition", JSON.stringify(position));
+      (raw) => {
+        const position = {
+          coordinates: {
+            accuracy: raw.coords.accuracy,
+            latitude: raw.coords.latitude,
+            longitude: raw.coords.longitude,
+            speed: raw.coords.speed,
+          }
+        };
+        console.log(position, raw); 
+        this.setLastPosition(position);
+
         Vue.set(this, "position", position);
       }, (error) => {
-        console.log("Error : ", error);
+        window.alert(`Error : ${JSON.stringify(error)}`);
       }, {
         enableHighAccuracy: false,
-        // timeout: 5000,
-        // maximumAge: 0,
-      }
-    );
+        maximumAge: 30 * 1000,
+      });
   },
   filters: {
     meterUnit(distance) {
@@ -97,6 +109,17 @@ export default {
       );
       return distance;
     },
+    setLastPosition(position) {
+      localStorage.setItem("Home-LastLocation", JSON.stringify(position));
+    },
+    getLastPosition() {
+      const raw = localStorage.getItem("Home-LastLocation");
+      if (raw) {
+        return JSON.parse(raw);
+      } else {
+        return null;
+      }
+    },
   },
   computed: {
     closeStations() {
@@ -108,7 +131,7 @@ export default {
           }
         })
         .sortBy(item => item.distance)
-        .take(100)
+        .take(36)
         .value();
     }
   },
@@ -122,15 +145,60 @@ export default {
 </script>
 
 <style lang="scss">
+$highlightColor: #FF6E30;
+
 .stationList {
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+
+  box-shadow: 0px -2px 12px 0px #0000004f;
+
+  padding: 10px 3px 0px 3px;
+  margin: 30% 4px 0px 4px;
 }
 
 .stationListHeader {
   border-bottom: 1px solid black;
-  font-size: 28px;
-  font-weight: bold;
+  padding: 9px 12px;
+  display: flex;
+  align-items: baseline;
+  
+  .listTitle {
+    font-size: 28px;
+    font-weight: bold;
+  }
 
-  padding: 9px 10px;
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+  }
+  .updateIndicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 3px;
+    
+    background-color: $highlightColor;
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+    animation: pulse 2s infinite;
+  }  
+
+  .description {
+    font-size: 16px;
+    font-weight: 300;
+
+    margin-left: 10px;
+    margin-right: 2px;
+  }
 }
 
 .stationListBody {
@@ -157,7 +225,7 @@ export default {
     }
 
     .availableBikes {
-      color: #FF6E30;
+      color: $highlightColor;
       font-weight: bold;
 
       .unit {
@@ -166,7 +234,7 @@ export default {
     }
 
     .bookmark {
-      color: #FF6E30;
+      color: $highlightColor;
       padding-right: 5px;
     }
   }
