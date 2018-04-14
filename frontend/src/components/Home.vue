@@ -107,11 +107,10 @@ export default {
             speed: raw.coords.speed,
           }
         };
-        console.log(position, raw); 
         this.setLastPosition(position); 
         this.position = position;
       }, (error) => {
-        window.alert(`Error : ${JSON.stringify(error)}`);
+        // window.alert(`Error : ${JSON.stringify(error)}`);
       }, {
         enableHighAccuracy: false,
         maximumAge: 30 * 1000,
@@ -162,21 +161,6 @@ export default {
       }
     },
     fetchStations() {
-      // this.allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
-      //   const name = (() => {
-      //     const res = s.stationName.match(/(\d+).(.+)/i)
-      //     return ((res && res[2]) || s.stationName)
-      //   })()
-      //   return {
-      //     name,
-      //     coordinate: {
-      //       latitude: Number(s.stationLatitude),
-      //       longitude: Number(s.stationLongitude),
-      //     },
-      //     availableBikes: Number(s.parkingBikeTotCnt),
-      //   }
-      // });      
-      // // // Not implemtend yet. so..      
       axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
         .then((response) => {
           this.allStations = response.data.stations;
@@ -184,11 +168,9 @@ export default {
         });
     },
     activateMap() {
-      console.log("MAP")
       this.focus = "map";
     },
     activateList() {
-      console.log("LIST")
       this.focus = "list";
     },
   },
