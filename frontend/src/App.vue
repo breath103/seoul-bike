@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header>
-      <span>Seoul Bike</span>
+      <div class="title">Seoul Bike</div>
     </header>
     <main>
       <router-view></router-view>
@@ -10,15 +10,22 @@
 </template>
 
 <script>
+// document.body.addEventListener(
+//   'touchmove', 
+//   (event) => event.preventDefault(), 
+//   false
+// );
+
 export default {
   name: 'app'
 }
 </script>
 
-<style>
+<style lang="scss">
 body, html {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 #app {
@@ -28,31 +35,30 @@ body, html {
   color: #2c3e50;
 }
 
+$headerHeight: 50px;
 main {
   position: fixed;
   left: 0;
-  top: 56px;
+  top: $headerHeight;
   bottom: 0;
   right: 0;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 header {
   margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
+  height: $headerHeight;
+  display: flex;
+  align-items: center;
+
+  padding: 0px 16px;
   background-color: #35495E;
   color: #ffffff;
-}
 
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
 }
 </style>
