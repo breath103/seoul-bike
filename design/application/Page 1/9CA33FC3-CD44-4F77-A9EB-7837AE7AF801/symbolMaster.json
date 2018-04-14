@@ -7,7 +7,7 @@
     "green": 1,
     "red": 1
   },
-  "changeIdentifier": 2266,
+  "changeIdentifier": 4567,
   "do_objectID": "9CA33FC3-CD44-4F77-A9EB-7837AE7AF801",
   "exportOptions": {
     "_class": "exportOptions",
@@ -21,7 +21,7 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 98,
+    "height": 84,
     "width": 640,
     "x": 1088,
     "y": 107
@@ -59,10 +59,6 @@
     {
       "class": "text",
       "id": "2FCEEB6A-E604-4CAF-A4D2-986AB34FCE0D"
-    },
-    {
-      "class": "shapeGroup",
-      "id": "B1645804-6A9C-4916-B60C-56CEB7904949"
     }
   ],
   "name": "Item Cell",

@@ -1,10 +1,9 @@
 {
   "_class": "shapeGroup",
   "clippingMaskMode": 0,
-  "do_objectID": "6C41E014-89C9-4669-9382-9B9C404386FA",
+  "do_objectID": "7490A2E5-7142-4E55-B095-ABA26F7524DE",
   "exportOptions": {
     "_class": "exportOptions",
-    "do_objectID": "907B4D4D-0C98-4C48-A16E-1A013DD86E52",
     "exportFormats": [
     ],
     "includedLayerIds": [
@@ -15,8 +14,7 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "do_objectID": "AB7AC605-8830-4941-955F-269F400E5E6E",
-    "height": 81,
+    "height": 1136,
     "width": 640,
     "x": 0,
     "y": 0
@@ -27,14 +25,14 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "rectangle",
-      "id": "77A9F893-89C0-40B6-8AEC-F897046794F7"
+      "id": "63D877D7-52D7-4322-AC58-C838E7E2E2A0"
     }
   ],
-  "name": "Rectangle 3",
+  "name": "Rectangle 4",
   "nameIsFixed": false,
   "resizingConstraint": 63,
   "resizingType": 0,
@@ -53,12 +51,11 @@
           "red": 0.592
         },
         "fillType": 0,
-        "isEnabled": false,
+        "isEnabled": true,
         "position": 1,
         "thickness": 1
       }
     ],
-    "do_objectID": "6519068A-6D72-4596-859B-3369262671E4",
     "endDecorationType": 0,
     "fills": [
       {
@@ -66,11 +63,16 @@
         "color": {
           "_class": "color",
           "alpha": 1,
-          "blue": 0.454838070019095,
-          "green": 0.7503454506802721,
-          "red": 0.03779261236558429
+          "blue": 0.847,
+          "green": 0.847,
+          "red": 0.847
         },
-        "fillType": 0,
+        "fillType": 4,
+        "image": {
+          "_class": "MSJSONFileReference",
+          "_ref": "images/d830b3890df590677f6e4a620cf3d2e5955ea784",
+          "_ref_class": "MSImageData"
+        },
         "isEnabled": true,
         "noiseIndex": 0,
         "noiseIntensity": 0,

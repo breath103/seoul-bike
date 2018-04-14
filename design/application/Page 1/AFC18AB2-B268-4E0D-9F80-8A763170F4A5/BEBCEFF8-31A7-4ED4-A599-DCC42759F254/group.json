@@ -1,6 +1,6 @@
 {
-  "_class": "symbolInstance",
-  "do_objectID": "F58611EC-C1C9-409A-8154-52252FEF56A9",
+  "_class": "group",
+  "do_objectID": "BEBCEFF8-31A7-4ED4-A599-DCC42759F254",
   "exportOptions": {
     "_class": "exportOptions",
     "exportFormats": [
@@ -13,34 +13,37 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 98,
-    "width": 640,
-    "x": 0,
-    "y": 392
+    "height": 61,
+    "width": 61,
+    "x": 23,
+    "y": 102
   },
-  "horizontalSpacing": 0,
+  "hasClickThrough": false,
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 0,
-  "name": "Item Cell Copy 3",
-  "nameIsFixed": false,
-  "overrideValues": [
+  "layerListExpandedType": 2,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "D38E2A24-4602-4525-826E-E0790C43F5CB"
+    },
+    {
+      "class": "bitmap",
+      "id": "27761870-42AA-40F6-AFB9-3528C3CF11C5"
+    }
   ],
-  "overrides": {
-  },
+  "name": "Left Nav",
+  "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,
-  "scale": 1,
   "shouldBreakMaskChain": false,
   "style": {
     "_class": "style",
     "endDecorationType": 0,
     "miterLimit": 10,
     "startDecorationType": 0
-  },
-  "symbolID": "F52DD241-CF49-4397-946C-20ABC1E894C8",
-  "verticalSpacing": 0
+  }
 }

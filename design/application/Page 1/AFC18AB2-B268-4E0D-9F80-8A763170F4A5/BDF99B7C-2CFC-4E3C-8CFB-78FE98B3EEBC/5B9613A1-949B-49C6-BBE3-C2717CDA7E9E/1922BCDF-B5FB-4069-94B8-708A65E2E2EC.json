@@ -7,7 +7,7 @@
     }
   },
   "automaticallyDrawOnUnderlyingPath": false,
-  "do_objectID": "FEA9A68C-FA36-40A0-AA67-B7303FDB2162",
+  "do_objectID": "1922BCDF-B5FB-4069-94B8-708A65E2E2EC",
   "dontSynchroniseWithSymbol": false,
   "exportOptions": {
     "_class": "exportOptions",
@@ -23,14 +23,14 @@
     "constrainProportions": false,
     "height": 66,
     "width": 246,
-    "x": 19,
-    "y": 14
+    "x": 0,
+    "y": 0
   },
   "glyphBounds": "{{0, 11}, {244, 38}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
-  "isVisible": true,
+  "isVisible": false,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
   "name": "Seoul Bike",
@@ -63,5 +63,5 @@
       "verticalAlignment": 0
     }
   },
-  "textBehaviour": 0
+  "textBehaviour": 1
 }

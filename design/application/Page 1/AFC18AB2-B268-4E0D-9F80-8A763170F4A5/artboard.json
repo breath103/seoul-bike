@@ -69,7 +69,19 @@
     },
     {
       "class": "shapeGroup",
-      "id": "6C41E014-89C9-4669-9382-9B9C404386FA"
+      "id": "7490A2E5-7142-4E55-B095-ABA26F7524DE"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "6167CFB4-452A-4772-8916-B051460AA033"
+    },
+    {
+      "class": "group",
+      "id": "852C7594-6207-4A5A-96DA-3DED404B648D"
+    },
+    {
+      "class": "group",
+      "id": "BEBCEFF8-31A7-4ED4-A599-DCC42759F254"
     },
     {
       "class": "group",

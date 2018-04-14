@@ -13,10 +13,10 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 1098,
+    "height": 81,
     "width": 640,
     "x": 0,
-    "y": 79
+    "y": 82
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -27,11 +27,7 @@
   "layers": [
     {
       "class": "group",
-      "id": "F82FA0DA-C9B2-4F94-80AE-39A6BE6F9FCE"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "01DDEED4-6CCF-458B-B514-3D4E92B248CE"
+      "id": "5B9613A1-949B-49C6-BBE3-C2717CDA7E9E"
     }
   ],
   "name": "빌릴때",

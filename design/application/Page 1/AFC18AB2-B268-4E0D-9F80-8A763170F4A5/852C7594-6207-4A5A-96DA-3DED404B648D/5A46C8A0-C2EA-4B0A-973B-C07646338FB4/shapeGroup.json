@@ -1,10 +1,9 @@
 {
   "_class": "shapeGroup",
   "clippingMaskMode": 0,
-  "do_objectID": "65DD078C-F4AC-4288-B902-92B14B7CF0ED",
+  "do_objectID": "5A46C8A0-C2EA-4B0A-973B-C07646338FB4",
   "exportOptions": {
     "_class": "exportOptions",
-    "do_objectID": "BA2A8DD3-486E-47AB-BB3C-61CB51DD2DA2",
     "exportFormats": [
     ],
     "includedLayerIds": [
@@ -14,12 +13,11 @@
   },
   "frame": {
     "_class": "rect",
-    "constrainProportions": false,
-    "do_objectID": "E1F061FF-0581-4C82-99F5-C15CFF8C08FA",
-    "height": 10,
-    "width": 10,
-    "x": 292,
-    "y": 58
+    "constrainProportions": true,
+    "height": 34,
+    "width": 34,
+    "x": 91,
+    "y": 91
   },
   "hasClickThrough": false,
   "hasClippingMask": false,
@@ -31,7 +29,7 @@
   "layers": [
     {
       "class": "oval",
-      "id": "E43DADCE-F8EF-4493-975D-D6AE4CAD6F29"
+      "id": "814AF817-B235-409B-BB25-EDE4D76CC0A4"
     }
   ],
   "name": "Oval",
@@ -48,17 +46,16 @@
         "color": {
           "_class": "color",
           "alpha": 1,
-          "blue": 0.592,
-          "green": 0.592,
-          "red": 0.592
+          "blue": 1,
+          "green": 1,
+          "red": 1
         },
         "fillType": 0,
-        "isEnabled": false,
+        "isEnabled": true,
         "position": 0,
-        "thickness": 1
+        "thickness": 4
       }
     ],
-    "do_objectID": "9B8C9E14-7851-441A-9808-4B1B0BF3031F",
     "endDecorationType": 0,
     "fills": [
       {
@@ -66,9 +63,9 @@
         "color": {
           "_class": "color",
           "alpha": 1,
-          "blue": 0.305027173913043,
-          "green": 0,
-          "red": 1
+          "blue": 0.2490419141289328,
+          "green": 0.8733524659863946,
+          "red": 0
         },
         "fillType": 0,
         "isEnabled": true,
@@ -79,6 +76,28 @@
       }
     ],
     "miterLimit": 10,
+    "shadows": [
+      {
+        "_class": "shadow",
+        "blurRadius": 7,
+        "color": {
+          "_class": "color",
+          "alpha": 0.5,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "contextSettings": {
+          "_class": "graphicsContextSettings",
+          "blendMode": 0,
+          "opacity": 1
+        },
+        "isEnabled": true,
+        "offsetX": 0,
+        "offsetY": 2,
+        "spread": 0
+      }
+    ],
     "startDecorationType": 0
   },
   "windingRule": 1
