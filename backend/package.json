@@ -1,0 +1,54 @@
+{
+  "name": "lambda-microservice-template",
+  "version": "1.0.1",
+  "description": "Template for microservice using lambda / typescript / serverless",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/balmbees/lambda-microservice-template.git"
+  },
+  "scripts": {
+    "build": "rm -Rf dst && tsc && cd src && find . -name '*.json' -type f -exec cp {} ../dst/{} \\; && cd ..",
+    "pack-local": "rm -f dst.zip && cp package.json dst/package.json && (cp .npmrc dst/.npmrc || true) && cd dst && ln -s ../node_modules node_modules && npm ls && zip -r ../dst.zip . ** && cd ..",
+    "pack": "rm -f dst.zip && cp package.json dst/package.json && (cp package-lock.json dst/ || true) && (cp .npmrc dst/.npmrc || true) && cd dst && npm install --cache=../.npm --production && npm ls && zip -r ../dst.zip . ** && cd ..",
+    "dynamodb:cleanup": "(test -e $TMPDIR/dynamodb-local.pid && pkill -SIGINT -P $(cat $TMPDIR/dynamodb-local.pid)); rm -f $TMPDIR/dynamodb-local.pid",
+    "dynamodb:setup": "node $(npm bin)/local-dynamo --port 8000 & echo $! > $TMPDIR/dynamodb-local.pid; sleep 3",
+    "pretest": "rm -Rf dst && tsc -p ./tsconfig.test.json && cd src && find . -name '*.json' -type f -exec cp {} ../dst/{} \\; && cd .. && npm run dynamodb:cleanup && npm run dynamodb:setup",
+    "test": "mocha -t 20000 dst/**/__test__/**/*.js",
+    "posttest": "npm run dynamodb:cleanup",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "deploy": "npm run build && npm run pack && serverless deploy",
+    "deploy:stage": "npm run deploy -- -s stage",
+    "deploy:prod": "npm run deploy -- -s prod",
+    "info:stage": "sls info -s stage",
+    "info:prod": "sls info -s prod",
+    "log:prod": "sls logs -t -f cron -s prod --startTime 1m"
+  },
+  "engines": {
+    "node": "6.10.*",
+    "npm": "^5.6.0"
+  },
+  "author": "Kurt Lee",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "3.4.34",
+    "@types/chai-as-promised": "0.0.29",
+    "@types/cli-color": "0.3.29",
+    "@types/mocha": "2.2.32",
+    "@types/node": "6.0.52",
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "cli-color": "1.1.0",
+    "local-dynamo": "^0.5.0",
+    "lodash": "4.17.4",
+    "mocha": "3.1.2",
+    "optimist": "0.6.1",
+    "serverless": "1.6.0",
+    "tslint": "5.4.3",
+    "typescript": "2.4.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.224.1",
+    "axios": "^0.18.0"
+  }
+}

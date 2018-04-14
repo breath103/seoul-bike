@@ -1,0 +1,58 @@
+service: seoul-bike
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: ap-northeast-2
+  iamRoleStatements:
+   - Effect: "Allow"
+     Action:
+       - "s3:*"
+     Resource: "arn:aws:s3:::seoul-bike-${opt:stage}/*"
+  environment:
+    ASSET_BUCKET: seoul-bike-${opt:stage}
+
+package:
+  artifact: dst.zip
+
+functions:
+  cron:
+    handler: cron.handler
+    events:
+      - schedule:
+          rate: rate(5 minutes)
+
+resources:
+  Resources:
+    AssetBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: seoul-bike-${opt:stage}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - "*"
+              MaxAge: 362000
+              
+    AssetBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: AssetBucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: "*"
+            Action: s3:GetObject
+            Resource:
+              Fn::Join:
+              - ''
+              - - 'arn:aws:s3:::'
+                - Ref: AssetBucket
+                - "/*"

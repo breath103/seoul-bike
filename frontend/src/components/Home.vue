@@ -11,7 +11,7 @@
           :key="index"
           :position="item.station.coordinate | toGMapCoord"
           :clickable="true"
-          :label="item.station.availableBikes"
+          :label="`${item.station.availableBikes}`"
         >
         </gmap-marker>      
       </gmap-map>
@@ -154,38 +154,25 @@ export default {
       }
     },
     fetchStations() {
-      this.allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
-        const name = (() => {
-          const res = s.stationName.match(/(\d+).(.+)/i)
-          return ((res && res[2]) || s.stationName)
-        })()
-        return {
-          name,
-          coordinate: {
-            latitude: Number(s.stationLatitude),
-            longitude: Number(s.stationLongitude),
-          },
-          availableBikes: s.parkingBikeTotCnt
-        }
-      });      
-      // // Not implemtend yet. so..      
-      // axios.get("https://www.bikeseoul.com/app/station/getStationRealtimeStatus.do")
-      //   .then((response) => {
-      //     this.allStations = response.data.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
-      //       const name = (() => {
-      //         const res = s.stationName.match(/(\d+).(.+)/i)
-      //         return ((res && res[2]) || s.stationName)
-      //       })()
-      //       return {
-      //         name,
-      //         coordinate: {
-      //           latitude: Number(s.stationLatitude),
-      //           longitude: Number(s.stationLongitude),
-      //         },
-      //         availableBikes: s.parkingBikeTotCnt
-      //       }
-      //     });
-      //   });
+      // this.allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
+      //   const name = (() => {
+      //     const res = s.stationName.match(/(\d+).(.+)/i)
+      //     return ((res && res[2]) || s.stationName)
+      //   })()
+      //   return {
+      //     name,
+      //     coordinate: {
+      //       latitude: Number(s.stationLatitude),
+      //       longitude: Number(s.stationLongitude),
+      //     },
+      //     availableBikes: Number(s.parkingBikeTotCnt),
+      //   }
+      // });      
+      // // // Not implemtend yet. so..      
+      axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
+        .then((response) => {
+          this.allStations = response.data.stations;
+        });
     },
     activateMap() {
       console.log("MAP")
