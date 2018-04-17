@@ -2,12 +2,13 @@
   <div>
     <div class="map">
       <gmap-map
-        :center="{lat:position.coordinates.latitude, lng: position.coordinates.longitude}"
-        :zoom="16"
+        :center="mapCenter"
+        :zoom="15"
+        @center_changed="mapCenterChanged"
         style="width: 100%; height: 100%"
       >
         <gmap-marker
-          v-for="(item, index) in closeStations"
+          v-for="(item, index) in stationsCloseToMapCenter"
           :key="index"
           :position="item.station.coordinate | toGMapCoord"
           :clickable="true"
@@ -44,7 +45,7 @@
         </div>
         <div class="stationListBody">
           <div class="stationListItem" 
-               v-for="item in closeStations"
+               v-for="item in stationsCloseToMe"
                :key="item.name">
             <div class="name" >
               {{ item.station.name }}
@@ -72,21 +73,8 @@ import * as geolib from 'geolib';
 import * as axios from 'axios';
 import * as moment from 'moment';
 
-const sample = require('./sample.json')
-// const allStations = sample.realtimeList.filter(s => s.stationUseYn === 'Y').map(s => {
-//   const name = (() => {
-//     const res = s.stationName.match(/(\d+).(.+)/i)
-//     return ((res && res[2]) || s.stationName)
-//   })()
-//   return {
-//     name,
-//     coordinate: {
-//       latitude: Number(s.stationLatitude),
-//       longitude: Number(s.stationLongitude),
-//     },
-//     availableBikes: s.parkingBikeTotCnt
-//   }
-// })
+// Seoul City Hall
+const DEFAULT_POSITION = { lat: 37.566701, lng: 126.978428 };
 
 export default {
   name: 'Home',
@@ -95,8 +83,16 @@ export default {
     this.focus = "map";
     this.allStations = [];
     this.allStationsUpdatedAt = null;
+
+    if (this.position) {
+      this.mapCenter = { lat: this.position.coordinates.latitude, lng: this.position.coordinates.longitude };
+    } else {
+      // Seoul City Hall
+      this.mapCenter = DEFAULT_POSITION;
+    }
   },
   mounted() {
+    let updateCount = 0;
     navigator.geolocation.watchPosition(
       (raw) => {
         const position = {
@@ -109,6 +105,12 @@ export default {
         };
         this.setLastPosition(position); 
         this.position = position;
+
+        if (updateCount === 0) {
+          // Move to currentPosition
+          this.mapCenter = this.position.coordinates;
+        }
+        updateCount++;
       }, (error) => {
         // window.alert(`Error : ${JSON.stringify(error)}`);
       }, {
@@ -139,12 +141,7 @@ export default {
   methods: {
     distanceToMe(coordinate) {
       const distance = geolib.getDistance(
-        (this.position && this.position.coordinates)
-        ||
-        {
-          latitude: 37.5649,
-          longitude: 126.9965,
-        },
+        (this.position && this.position.coordinates) || DEFAULT_POSITION,
         coordinate,
       );
       return distance;
@@ -173,14 +170,36 @@ export default {
     activateList() {
       this.focus = "list";
     },
+
+    mapCenterChanged(newCenter) {
+      this.currentMapCenter = {
+        lat: newCenter.lat(),
+        lng: newCenter.lng(),
+      };
+    }
   },
   computed: {
-    closeStations() {
+    stationsCloseToMe() {
       return _(this.allStations)
         .map(station => {
           return {
             station,
             distance: this.distanceToMe(station.coordinate),
+          }
+        })
+        .sortBy(item => item.distance)
+        .take(36)
+        .value();
+    },
+    stationsCloseToMapCenter() {
+      return _(this.allStations)
+        .map(station => {
+          return {
+            station,
+            distance: geolib.getDistance(
+              this.currentMapCenter || this.mapCenter,
+              station.coordinate,
+            ),
           }
         })
         .sortBy(item => item.distance)
@@ -193,6 +212,8 @@ export default {
       position: this.position,
       allStations: this.allStations,
       allStationsUpdatedAt: this.allStationsUpdatedAt,
+      mapCenter: this.mapCenter,
+      currentMapCenter: this.currentMapCenter, 
       focus: this.focus,
     }
   }
@@ -229,7 +250,7 @@ $highlightColor: #FF6E30;
 }
 
 .stationListTopMargin {
-  height: 62%;
+  height: 70%;
 }
 
 .stationList {
