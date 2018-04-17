@@ -10,7 +10,7 @@
         <gmap-marker
           v-for="(item, index) in stationsCloseToMapCenter"
           :key="index"
-          :position="item.station.coordinate | toGMapCoord"
+          :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
           :label="`${item.station.availableBikes}`"
         >
@@ -46,7 +46,8 @@
         <div class="stationListBody">
           <div class="stationListItem" 
                v-for="item in stationsCloseToMe"
-               :key="item.name">
+               :key="item.name"
+               @click="currentMapCenter = mapCenter = toGMapCoord(item.station.coordinate)">
             <div class="name" >
               {{ item.station.name }}
             </div>
@@ -128,17 +129,17 @@ export default {
         return `${(distance / 1000).toFixed(2)}km`;
       }
     },
+    fromNow(timestamp) {
+      return moment(timestamp).fromNow();
+    },
+  },
+  methods: {
     toGMapCoord(coordinate) {
       return {
         lat: coordinate.latitude,
         lng: coordinate.longitude,
       }
     },
-    fromNow(timestamp) {
-      return moment(timestamp).fromNow();
-    },
-  },
-  methods: {
     distanceToMe(coordinate) {
       const distance = geolib.getDistance(
         (this.position && this.position.coordinates) || DEFAULT_POSITION,
