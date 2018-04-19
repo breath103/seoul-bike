@@ -2,6 +2,7 @@
   <div>
     <div class="map">
       <gmap-map
+        ref="map"
         :center="mapCenter"
         :zoom="15"
         @center_changed="mapCenterChanged"
@@ -14,7 +15,21 @@
           :clickable="true"
           :label="`${item.station.availableBikes}`"
         >
-        </gmap-marker>      
+        </gmap-marker>
+
+        <gmap-marker
+          ref="currentPositionMarker"
+          v-if="position"
+          :position="position"
+          :icon="{ 
+            url: '/static/img/icons/marker.svg', 
+            anchor: { x: 56, y: 56 } 
+          }"
+        >
+        </gmap-marker>
+
+        <gmap-circle :center="position" :radius="5">
+        </gmap-circle>
       </gmap-map>
     </div>
     <div :class="[(focus == 'map' ? 'disable' : 'active'), 'stationListContainer']">
@@ -73,6 +88,7 @@ import Vue from 'vue';
 import * as geolib from 'geolib';
 import * as axios from 'axios';
 import * as moment from 'moment';
+import { setInterval } from 'timers';
 
 // Seoul City Hall
 const DEFAULT_POSITION = { lat: 37.566701, lng: 126.978428 };
@@ -102,7 +118,7 @@ export default {
       });
 
     // user position
-    this.position = this.getLastPosition() // || DEFAULT_POSITION;
+    this.position = this.getLastPosition(); // || DEFAULT_POSITION;
 
     // Map Setting
     if (this.position) {
@@ -138,6 +154,17 @@ export default {
         enableHighAccuracy: false,
         maximumAge: 30 * 1000,
       });
+  },
+  mounted() {
+    console.log(window.google);
+    console.log(this.$refs.currentPositionMarker);
+    
+    // setInterval(() => {
+    //   if (this.$refs.currentPositionMarker) {
+    //     this.$refs.currentPositionMarker.$markerObject.anchorPosition = { x:}
+    //   }
+    //   console.log(this.$refs.currentPositionMarker.$markerObject)
+    // }, 100);
   },
   filters: {
     meterUnit(distance) {
@@ -196,8 +223,7 @@ export default {
         this.lastCalCenter = newCenter;
       } else {
         const distance = getDistance(this.lastCalCenter, newCenter);
-        // console.log("Distance: ", distance);
-        if (distance > 10) {
+        if (distance > 50) {
           this.lastCalCenter = newCenter;
         }
       }
@@ -219,7 +245,7 @@ export default {
         .value();
     },
     stationsCloseToMapCenter() {
-      // console.log("stationsCloseToMapCenter !");
+      console.log("stationsCloseToMapCenter !");
       return _(this.allStations)
         .map(station => {
           return {
@@ -230,16 +256,20 @@ export default {
         .sortBy(item => item.distance)
         .take(36)
         .value();
-    }
+    },
   },
   data() {
     return {
+      focus: this.focus,
+
       position: this.position,
+      
       allStations: this.allStations,
       allStationsMeta: this.allStationsMeta,
+      
       mapCenter: this.mapCenter,
       currentMapCenter: this.currentMapCenter, 
-      focus: this.focus,
+      lastCalCenter: this.lastCalCenter,
     }
   }
 }

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Seoul Bike Web Application",
   "author": "Kurt Lee <breath103@gmail.com>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
