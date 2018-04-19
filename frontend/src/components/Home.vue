@@ -13,7 +13,15 @@
           :key="item.station.id"
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
-          :label="`${item.station.availableBikes}`"
+          :icon="{ 
+            url: '/static/img/icons/station.svg',
+          }"
+          :label="{ 
+            text: `${item.station.availableBikes}`,
+            color: '#FFFFFF',
+            fontSize: '20px',
+            fontWeight: 'bold'
+          }"
         >
         </gmap-marker>
 
@@ -27,9 +35,9 @@
           }"
         >
         </gmap-marker>
-
         <gmap-circle :center="position" :radius="5">
         </gmap-circle>
+
       </gmap-map>
     </div>
     <div :class="[(focus == 'map' ? 'disable' : 'active'), 'stationListContainer']">
