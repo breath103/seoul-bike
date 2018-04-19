@@ -8,8 +8,8 @@
         style="width: 100%; height: 100%"
       >
         <gmap-marker
-          v-for="(item, index) in stationsCloseToMapCenter"
-          :key="index"
+          v-for="item in stationsCloseToMapCenter"
+          :key="item.station.id"
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
           :label="`${item.station.availableBikes}`"
@@ -30,8 +30,8 @@
           <div class="description">
             <div>
               <span v-if="position">
-                {{ position.coordinates.longitude.toFixed(4) }}, 
-                {{ position.coordinates.latitude.toFixed(4) }}
+                {{ position.lng.toFixed(4) }}, 
+                {{ position.lat.toFixed(4) }}
               </span>
               <span v-if="!position">
                 위치 확인중...
@@ -39,7 +39,7 @@
             </div>
             <div>
               <span class="updateIndicator"></span>
-              <span>{{ this.allStationsUpdatedAt | fromNow }}</span>
+              <span>{{ this.allStationsMeta.createdAt | fromNow }}</span>
             </div>
           </div>
         </div>
@@ -77,39 +77,59 @@ import * as moment from 'moment';
 // Seoul City Hall
 const DEFAULT_POSITION = { lat: 37.566701, lng: 126.978428 };
 
+function getDistance(a, b) {
+  return geolib.getDistance(
+    { latitude: a.latitude || a.lat, longitude: a.longitude || a.lng },
+    { latitude: b.latitude || b.lat, longitude: b.longitude || b.lng },
+  );
+}
+
 export default {
   name: 'Home',
   created() {
-    this.position = this.getLastPosition();
+    // UI setting
     this.focus = "map";
-    this.allStations = [];
-    this.allStationsUpdatedAt = null;
 
+    // Remote data
+    this.allStations = [];
+    this.allStationsMeta = { createdAt: null };
+
+    // Fetch Stations
+    axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
+      .then(({ data }) => {
+        this.allStations = data.stations;
+        this.allStationsMeta = { createdAt: data.meta.createdAt };
+      });
+
+    // user position
+    this.position = this.getLastPosition() // || DEFAULT_POSITION;
+
+    // Map Setting
     if (this.position) {
-      this.mapCenter = { lat: this.position.coordinates.latitude, lng: this.position.coordinates.longitude };
+      this.mapCenter = this.position;
     } else {
       // Seoul City Hall
       this.mapCenter = DEFAULT_POSITION;
     }
-  },
-  mounted() {
+    this.lastCalCenter = this.mapCenter;
+
+    // Start Updating Position
     let updateCount = 0;
     navigator.geolocation.watchPosition(
       (raw) => {
+        // console.log("RAW", raw);
         const position = {
-          coordinates: {
-            accuracy: raw.coords.accuracy,
-            latitude: raw.coords.latitude,
-            longitude: raw.coords.longitude,
-            speed: raw.coords.speed,
-          }
+          accuracy: raw.coords.accuracy,
+          lat: raw.coords.latitude,
+          lng: raw.coords.longitude,
+          speed: raw.coords.speed,
         };
         this.setLastPosition(position); 
         this.position = position;
 
         if (updateCount === 0) {
           // Move to currentPosition
-          this.mapCenter = this.position.coordinates;
+          this.mapCenter = this.position;
         }
         updateCount++;
       }, (error) => {
@@ -118,8 +138,6 @@ export default {
         enableHighAccuracy: false,
         maximumAge: 30 * 1000,
       });
-
-    this.fetchStations();
   },
   filters: {
     meterUnit(distance) {
@@ -141,29 +159,25 @@ export default {
       }
     },
     distanceToMe(coordinate) {
-      const distance = geolib.getDistance(
-        (this.position && this.position.coordinates) || DEFAULT_POSITION,
-        coordinate,
+      return getDistance(
+        this.position,
+        coordinate
       );
-      return distance;
     },
     setLastPosition(position) {
-      localStorage.setItem("Home-LastLocation", JSON.stringify(position));
+      localStorage.setItem("Home-LastLocation-v4", JSON.stringify(position));
     },
     getLastPosition() {
-      const raw = localStorage.getItem("Home-LastLocation");
+      const raw = localStorage.getItem("Home-LastLocation-v4");
       if (raw) {
-        return JSON.parse(raw);
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
       } else {
         return null;
       }
-    },
-    fetchStations() {
-      axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
-        .then((response) => {
-          this.allStations = response.data.stations;
-          this.allStationsUpdatedAt = response.data.meta.createdAt;
-        });
     },
     activateMap() {
       this.focus = "map";
@@ -173,10 +187,22 @@ export default {
     },
 
     mapCenterChanged(newCenter) {
-      this.currentMapCenter = {
+      newCenter = {
         lat: newCenter.lat(),
         lng: newCenter.lng(),
       };
+      
+      if (!this.lastCalCenter) {
+        this.lastCalCenter = newCenter;
+      } else {
+        const distance = getDistance(this.lastCalCenter, newCenter);
+        // console.log("Distance: ", distance);
+        if (distance > 10) {
+          this.lastCalCenter = newCenter;
+        }
+      }
+
+      this.currentMapCenter = newCenter;
     }
   },
   computed: {
@@ -185,7 +211,7 @@ export default {
         .map(station => {
           return {
             station,
-            distance: this.distanceToMe(station.coordinate),
+            distance: getDistance(this.position || DEFAULT_POSITION, station.coordinate),
           }
         })
         .sortBy(item => item.distance)
@@ -193,14 +219,12 @@ export default {
         .value();
     },
     stationsCloseToMapCenter() {
+      // console.log("stationsCloseToMapCenter !");
       return _(this.allStations)
         .map(station => {
           return {
             station,
-            distance: geolib.getDistance(
-              this.currentMapCenter || this.mapCenter,
-              station.coordinate,
-            ),
+            distance: getDistance(this.lastCalCenter, station.coordinate),
           }
         })
         .sortBy(item => item.distance)
@@ -212,7 +236,7 @@ export default {
     return {
       position: this.position,
       allStations: this.allStations,
-      allStationsUpdatedAt: this.allStationsUpdatedAt,
+      allStationsMeta: this.allStationsMeta,
       mapCenter: this.mapCenter,
       currentMapCenter: this.currentMapCenter, 
       focus: this.focus,

@@ -5,7 +5,11 @@ export async function handler(event: any) {
   const response = await Axios.get("https://www.bikeseoul.com/app/station/getStationRealtimeStatus.do");  
   
   const stations = (response.data.realtimeList as Array<any>)
-    .filter((s: any) => s.stationUseYn === 'Y')
+    .filter((s: any) => {
+      return s.stationUseYn === 'Y' &&
+        Number(s.stationLatitude) !== 0 &&
+        Number(s.stationLongitude) !== 0;
+    })
     .map((s: any) => {
       const name = (() => {
         const res = s.stationName.match(/(\d+).(.+)/i)
