@@ -2,3 +2,5 @@
 
 # Ignore sketch files
 *.sketch
+
+.DS_Store
