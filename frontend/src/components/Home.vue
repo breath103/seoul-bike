@@ -13,10 +13,10 @@
           :key="item.station.name"
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
-          :icon="{ 
+          :icon="{
             url: '/static/img/icons/station.svg',
           }"
-          :label="{ 
+          :label="{
             text: `${item.station.availableBikes}`,
             color: '#FFFFFF',
             fontSize: '20px',
@@ -24,23 +24,18 @@
           }"
         >
         </gmap-marker>
-<<<<<<< HEAD
-
         <gmap-marker
           ref="currentPositionMarker"
           v-if="position"
           :position="position"
-          :icon="{ 
-            url: '/static/img/icons/marker.svg', 
-            anchor: { x: 56, y: 56 } 
+          :icon="{
+            url: '/static/img/icons/marker.svg',
+            anchor: { x: 56, y: 56 }
           }"
         >
         </gmap-marker>
         <gmap-circle :center="position" :radius="5">
         </gmap-circle>
-
-=======
->>>>>>> 9865cf87e31612265a2939a98faede4b29c58414
       </gmap-map>
     </div>
     <div :class="[(focus == 'map' ? 'disable' : 'active'), 'stationListContainer']">
@@ -169,7 +164,7 @@ export default {
   mounted() {
     console.log(window.google);
     console.log(this.$refs.currentPositionMarker);
-    
+
     // setInterval(() => {
     //   if (this.$refs.currentPositionMarker) {
     //     this.$refs.currentPositionMarker.$markerObject.anchorPosition = { x:}
@@ -274,18 +269,13 @@ export default {
       focus: this.focus,
 
       position: this.position,
-      
+
       allStations: this.allStations,
       allStationsMeta: this.allStationsMeta,
-      
+
       mapCenter: this.mapCenter,
-<<<<<<< HEAD
-      currentMapCenter: this.currentMapCenter, 
-      lastCalCenter: this.lastCalCenter,
-=======
       currentMapCenter: this.currentMapCenter,
-      focus: this.focus,
->>>>>>> 9865cf87e31612265a2939a98faede4b29c58414
+      lastCalCenter: this.lastCalCenter,
     }
   }
 }
