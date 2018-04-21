@@ -12,6 +12,9 @@ https://bike.sympathique.me/
 
 유일한 기능은 **내 주변의 거치대 목록 및 잔여 자전거 수 표시** 이며, 이 데이터는 현재 5분단위로 업데이트 됩니다.
 
+# 개인정보
+사용자의 위치정보는 사용자 단말기의 browser에만 저장되며, 외부로 공유되지 않습니다.
+
 # 화면
 <div>
 <img width="30%" src="https://github.com/breath103/seoul-bike/raw/master/docs/site.png" />
