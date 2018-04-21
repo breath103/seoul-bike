@@ -9,20 +9,20 @@
       >
         <gmap-marker
           v-for="item in stationsCloseToMapCenter"
-          :key="item.station.id"
+          :key="item.station.name"
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
           :label="`${item.station.availableBikes}`"
         >
-        </gmap-marker>      
+        </gmap-marker>
       </gmap-map>
     </div>
     <div :class="[(focus == 'map' ? 'disable' : 'active'), 'stationListContainer']">
-      <div class="stationListTopMargin" 
+      <div class="stationListTopMargin"
            @mouseover="activateMap()"
            @touchstart="activateMap()">
       </div>
-      <div class="stationList" 
+      <div class="stationList"
            @mouseover="activateList()"
            @touchstart="activateList()">
         <div class="stationListHeader">
@@ -30,7 +30,7 @@
           <div class="description">
             <div>
               <span v-if="position">
-                {{ position.lng.toFixed(4) }}, 
+                {{ position.lng.toFixed(4) }},
                 {{ position.lat.toFixed(4) }}
               </span>
               <span v-if="!position">
@@ -44,9 +44,9 @@
           </div>
         </div>
         <div class="stationListBody">
-          <div class="stationListItem" 
+          <div class="stationListItem"
                v-for="item in stationsCloseToMe"
-               :key="item.name"
+               :key="item.station.name"
                @click="currentMapCenter = mapCenter = toGMapCoord(item.station.coordinate)">
             <div class="name" >
               {{ item.station.name }}
@@ -124,7 +124,7 @@ export default {
           lng: raw.coords.longitude,
           speed: raw.coords.speed,
         };
-        this.setLastPosition(position); 
+        this.setLastPosition(position);
         this.position = position;
 
         if (updateCount === 0) {
@@ -191,7 +191,7 @@ export default {
         lat: newCenter.lat(),
         lng: newCenter.lng(),
       };
-      
+
       if (!this.lastCalCenter) {
         this.lastCalCenter = newCenter;
       } else {
@@ -238,7 +238,7 @@ export default {
       allStations: this.allStations,
       allStationsMeta: this.allStationsMeta,
       mapCenter: this.mapCenter,
-      currentMapCenter: this.currentMapCenter, 
+      currentMapCenter: this.currentMapCenter,
       focus: this.focus,
     }
   }
@@ -299,7 +299,7 @@ $highlightColor: #FF6E30;
   display: flex;
 
   // align-items: baseline;
-  
+
   .listTitle {
     font-size: 28px;
     font-weight: bold;
@@ -320,7 +320,7 @@ $highlightColor: #FF6E30;
     display: inline-block;
     width: 0.4em;
     height: 0.4em;
-    
+
     background-color: $highlightColor;
     border-radius: 50%;
 
@@ -328,7 +328,7 @@ $highlightColor: #FF6E30;
     animation: pulse 1.5s infinite;
 
     font-size: 20px;
-  }  
+  }
 
   .description {
     font-size: 14px;
