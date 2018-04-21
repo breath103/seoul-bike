@@ -10,7 +10,7 @@
       >
         <gmap-marker
           v-for="item in stationsCloseToMapCenter"
-          :key="item.station.name"
+          v-bind:key="item.station.name"
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
           :icon="{
@@ -121,6 +121,8 @@ export default {
       .then(({ data }) => {
         this.allStations = data.stations;
         this.allStationsMeta = { createdAt: data.meta.createdAt };
+
+        this.computeStationsCloseToMapCenter();
       });
 
     // user position
@@ -134,6 +136,9 @@ export default {
       this.mapCenter = DEFAULT_POSITION;
     }
     this.lastCalCenter = this.mapCenter;
+
+    // Stations
+    this.stationsCloseToMapCenter = [];
 
     // Start Updating Position
     let updateCount = 0;
@@ -229,12 +234,32 @@ export default {
         this.lastCalCenter = newCenter;
       } else {
         const distance = getDistance(this.lastCalCenter, newCenter);
-        if (distance > 50) {
+        if (distance > 100) {
           this.lastCalCenter = newCenter;
+          this.computeStationsCloseToMapCenter();
         }
       }
 
       this.currentMapCenter = newCenter;
+    },
+
+    computeStationsCloseToMapCenter() {
+      if (!this.debouncer) {
+        this.debouncer = _.debounce(() => {
+          this.stationsCloseToMapCenter =
+            _(this.allStations)
+              .map(station => {
+                return {
+                  station,
+                  distance: getDistance(this.lastCalCenter, station.coordinate),
+                }
+              })
+              .sortBy(item => item.distance)
+              .take(128)
+              .value();
+        }, 250);
+      }
+      this.debouncer();
     }
   },
   computed: {
@@ -244,19 +269,6 @@ export default {
           return {
             station,
             distance: getDistance(this.position || DEFAULT_POSITION, station.coordinate),
-          }
-        })
-        .sortBy(item => item.distance)
-        .take(36)
-        .value();
-    },
-    stationsCloseToMapCenter() {
-      console.log("stationsCloseToMapCenter !");
-      return _(this.allStations)
-        .map(station => {
-          return {
-            station,
-            distance: getDistance(this.lastCalCenter, station.coordinate),
           }
         })
         .sortBy(item => item.distance)
@@ -276,6 +288,8 @@ export default {
       mapCenter: this.mapCenter,
       currentMapCenter: this.currentMapCenter,
       lastCalCenter: this.lastCalCenter,
+
+      stationsCloseToMapCenter: this.stationsCloseToMapCenter,
     }
   }
 }
