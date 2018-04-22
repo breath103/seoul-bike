@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117936764-1"></script>
@@ -11,15 +11,14 @@
       gtag('config', 'UA-117936764-1');
     </script>
 
-
     <meta charset="utf-8">
+    <meta name="Description" content="서울시 자전거 따릉이 거치대 찾기 서비스입니다">
+    <title>따릉이</title>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>seoul-bike</title>
     <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
-    <!--[if IE]><link rel="shortcut icon" href="/static/img/icons/favicon.ico"><![endif]-->
-    <!-- Add to home screen for Android and modern mobile browsers -->
     <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
     <meta name="theme-color" content="#4DBA87">
 
@@ -37,14 +36,15 @@
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" 
-          integrity="sha256-7GAtDQ79wTEOjhBKf70uBQG7A5yyb+8rigu07atXWDY=" 
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+          integrity="sha256-7GAtDQ79wTEOjhBKf70uBQG7A5yyb+8rigu07atXWDY="
           crossorigin="anonymous" />
 
+
+    <!-- Firebase Setup -->
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script>
-      // Initialize Firebase
       var config = {
         apiKey: "AIzaSyDxUvZQoTTd5y3DKe3HOTiS2O8S2zdM4Ww",
         authDomain: "seoulbike-47306.firebaseapp.com",
@@ -55,12 +55,14 @@
       };
       firebase.initializeApp(config);
     </script>
+    <!-- Firebase Setup Ends -->
   </head>
   <body>
     <noscript>
-      This is your fallback content in case JavaScript fails to load.
+      사용하고 계시는 브라우저가 너무 오래되서 지원되지 않습니다.
     </noscript>
     <div id="app"></div>
+
     <!-- Todo: only include in production -->
     <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->

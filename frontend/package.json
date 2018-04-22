@@ -12,12 +12,15 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "debug": "^3.1.0",
     "firebase-tools": "^3.18.4",
     "geolib": "^2.0.24",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
+    "rxjs": "^5.5.10",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue-rx": "^5.0.0",
     "vue2-google-maps": "^0.8.12"
   },
   "devDependencies": {

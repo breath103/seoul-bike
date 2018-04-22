@@ -26,16 +26,14 @@
         </gmap-marker>
         <gmap-marker
           ref="currentPositionMarker"
-          v-if="position"
-          :position="position"
+          v-if="myPosition"
+          :position="myPosition"
           :icon="{
             url: '/static/img/icons/marker.svg',
             anchor: { x: 56, y: 56 }
           }"
         >
         </gmap-marker>
-        <gmap-circle :center="position" :radius="5">
-        </gmap-circle>
       </gmap-map>
     </div>
     <div :class="[(focus == 'map' ? 'disable' : 'active'), 'stationListContainer']">
@@ -50,23 +48,24 @@
           <div class="listTitle">내 주변</div>
           <div class="description">
             <div>
-              <span v-if="position">
-                {{ position.lng.toFixed(4) }},
-                {{ position.lat.toFixed(4) }}
+              <span v-if="myPosition">
+                {{ myPosition.lng.toFixed(4) }},
+                {{ myPosition.lat.toFixed(4) }}
               </span>
-              <span v-if="!position">
+              <span v-else>
                 위치 확인중...
               </span>
             </div>
             <div>
               <span class="updateIndicator"></span>
-              <span>{{ this.allStationsMeta.createdAt | fromNow }}</span>
+              <span v-if="allStationsMeta">{{ this.allStationsMeta.createdAt | fromNow }}</span>
+              <span v-else>거치대 가져오는중...</span>
             </div>
           </div>
         </div>
         <div class="stationListBody">
           <div class="stationListItem"
-               v-for="item in stationsCloseToMe"
+               v-for="item in stationsByMe"
                :key="item.station.name"
                @click="currentMapCenter = mapCenter = toGMapCoord(item.station.coordinate)">
             <div class="name" >
@@ -94,7 +93,10 @@ import Vue from 'vue';
 import * as geolib from 'geolib';
 import * as axios from 'axios';
 import * as moment from 'moment';
-import { setInterval } from 'timers';
+import * as Rx from "rxjs";
+import * as debug from "debug";
+
+const log = debug("HOME");
 
 // Seoul City Hall
 const DEFAULT_POSITION = { lat: 37.566701, lng: 126.978428 };
@@ -106,76 +108,28 @@ function getDistance(a, b) {
   );
 }
 
+localStorage.debug = "*";
+
 export default {
   name: 'Home',
   created() {
     // UI setting
     this.focus = "map";
 
-    // Remote data
-    this.allStations = [];
-    this.allStationsMeta = { createdAt: null };
-
-    // Fetch Stations
-    axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json")
-      .then(({ data }) => {
-        this.allStations = data.stations;
-        this.allStationsMeta = { createdAt: data.meta.createdAt };
-
-        this.computeStationsCloseToMapCenter();
-      });
-
     // user position
     this.position = this.getLastPosition(); // || DEFAULT_POSITION;
 
-    // Map Setting
-    if (this.position) {
-      this.mapCenter = this.position;
-    } else {
-      // Seoul City Hall
-      this.mapCenter = DEFAULT_POSITION;
-    }
+    // // Map Setting
+    // if (this.position) {
+    //   this.mapCenter = this.position;
+    // } else {
+    //   // Seoul City Hall
+    //   this.mapCenter = DEFAULT_POSITION;
+    // }
     this.lastCalCenter = this.mapCenter;
 
     // Stations
     this.stationsCloseToMapCenter = [];
-
-    // Start Updating Position
-    let updateCount = 0;
-    navigator.geolocation.watchPosition(
-      (raw) => {
-        // console.log("RAW", raw);
-        const position = {
-          accuracy: raw.coords.accuracy,
-          lat: raw.coords.latitude,
-          lng: raw.coords.longitude,
-          speed: raw.coords.speed,
-        };
-        this.setLastPosition(position);
-        this.position = position;
-
-        if (updateCount === 0) {
-          // Move to currentPosition
-          this.mapCenter = this.position;
-        }
-        updateCount++;
-      }, (error) => {
-        // window.alert(`Error : ${JSON.stringify(error)}`);
-      }, {
-        enableHighAccuracy: false,
-        maximumAge: 30 * 1000,
-      });
-  },
-  mounted() {
-    console.log(window.google);
-    console.log(this.$refs.currentPositionMarker);
-
-    // setInterval(() => {
-    //   if (this.$refs.currentPositionMarker) {
-    //     this.$refs.currentPositionMarker.$markerObject.anchorPosition = { x:}
-    //   }
-    //   console.log(this.$refs.currentPositionMarker.$markerObject)
-    // }, 100);
   },
   filters: {
     meterUnit(distance) {
@@ -202,6 +156,8 @@ export default {
         coordinate
       );
     },
+
+    // Local Storage Wrapper for Last Position
     setLastPosition(position) {
       localStorage.setItem("Home-LastLocation-v4", JSON.stringify(position));
     },
@@ -217,6 +173,8 @@ export default {
         return null;
       }
     },
+    //
+
     activateMap() {
       this.focus = "map";
     },
@@ -244,6 +202,7 @@ export default {
     },
 
     computeStationsCloseToMapCenter() {
+      log(this.allStations);
       if (!this.debouncer) {
         this.debouncer = _.debounce(() => {
           this.stationsCloseToMapCenter =
@@ -255,26 +214,79 @@ export default {
                 }
               })
               .sortBy(item => item.distance)
-              .take(128)
+              .take(64)
               .value();
         }, 250);
       }
       this.debouncer();
     }
   },
-  computed: {
-    stationsCloseToMe() {
-      return _(this.allStations)
-        .map(station => {
-          return {
-            station,
-            distance: getDistance(this.position || DEFAULT_POSITION, station.coordinate),
-          }
-        })
-        .sortBy(item => item.distance)
-        .take(36)
-        .value();
-    },
+  subscriptions() {
+    const stationsSub =
+      Rx.Observable.fromPromise(axios.get("https://s3.ap-northeast-2.amazonaws.com/seoul-bike-prod/stations.json"))
+        .map(({ data }) => data);
+
+    const allStations = Rx.Observable.of([]).merge(
+      stationsSub.map(({ stations }) => stations)
+    );
+    const allStationsMeta = stationsSub.map(({ meta }) => meta);
+
+    // My Position
+    const myPosition =
+      new Rx.BehaviorSubject(this.getLastPosition())
+        .map((position) => {
+          log("Position Updated");
+          // Anytime position changed, save position
+          this.setLastPosition(position);
+          return position;
+        });
+    navigator.geolocation.watchPosition(
+      (raw) => {
+        const position = {
+          accuracy: raw.coords.accuracy,
+          lat: raw.coords.latitude,
+          lng: raw.coords.longitude,
+          speed: raw.coords.speed,
+        };
+        myPosition.next(position);
+      }, (error) => {
+      }, {
+        enableHighAccuracy: false,
+        maximumAge: 30 * 1000,
+      });
+    ///
+
+    const stationsByMe =
+      Rx.Observable.combineLatest(
+        myPosition,
+        allStations,
+      ).map(([position, stations]) => {
+        log("Stations Updated %j %d", position, stations.length);
+        return _(stations)
+          .map(station => {
+            return {
+              station,
+              distance: getDistance(position, station.coordinate),
+            }
+          })
+          .sortBy(item => item.distance)
+          .take(36)
+          .value();
+      });
+
+    const mapCenter =
+      new Rx.BehaviorSubject(DEFAULT_POSITION)
+        .merge(myPosition);
+
+    return {
+      allStations,
+      allStationsMeta,
+
+      myPosition,
+      stationsByMe,
+
+      mapCenter,
+    }
   },
   data() {
     return {
@@ -282,10 +294,6 @@ export default {
 
       position: this.position,
 
-      allStations: this.allStations,
-      allStationsMeta: this.allStationsMeta,
-
-      mapCenter: this.mapCenter,
       currentMapCenter: this.currentMapCenter,
       lastCalCenter: this.lastCalCenter,
 
