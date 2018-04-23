@@ -1,7 +1,18 @@
 <template>
   <div id="app">
     <header>
-      <div class="title">Seoul Bike</div>
+      <div class="title">
+        <router-link to="/">Seoul Bike</router-link>
+      </div>
+
+      <div style="flex: 1">
+      </div>
+
+      <div>
+        <router-link to="about">
+          <i class="material-icons">help</i>
+        </router-link>
+      </div>
     </header>
     <main>
       <router-view></router-view>
@@ -53,6 +64,11 @@ header {
   padding: 0px 16px;
   background-color: #35495E;
   color: #ffffff;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
 
   .title {
     font-size: 24px;
