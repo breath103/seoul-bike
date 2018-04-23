@@ -37,10 +37,16 @@
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 
-    <link rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" 
-          integrity="sha256-7GAtDQ79wTEOjhBKf70uBQG7A5yyb+8rigu07atXWDY=" 
-          crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css"
+          integrity="sha256-7GAtDQ79wTEOjhBKf70uBQG7A5yyb+8rigu07atXWDY="
+          crossorigin="anonymous">
+    <!-- <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+          crossorigin="anonymous"> -->
 
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script>

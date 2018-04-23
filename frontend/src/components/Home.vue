@@ -85,6 +85,8 @@
         </div>
       </div>
     </div>
+
+    <router-view class="overlay" name="overlay"/>
   </div>
 </template>
 
@@ -255,7 +257,7 @@ export default {
                 }
               })
               .sortBy(item => item.distance)
-              .take(128)
+              .take(32)
               .value();
         }, 250);
       }
@@ -428,6 +430,15 @@ $highlightColor: #FF6E30;
       padding-right: 5px;
     }
   }
+}
+
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 </style>
