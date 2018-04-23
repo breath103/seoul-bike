@@ -10,7 +10,7 @@
               이 사이트는 서울시 자전거 <a href="https://www.bikeseoul.com"><b>따릉이</b></a> 를 위한 거치대 찾기 서비스 입니다.
             </p>
           </div>
-          
+
           <div>
             <h3>사용 안내</h3>
             <ul>
@@ -73,6 +73,13 @@ export default {
 }
 
 .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+
   transform: translate(0, 0);
   word-break: keep-all;
 
@@ -92,7 +99,7 @@ export default {
     ul {
       margin: 0;
     }
-  } 
+  }
 
   .contact {
     display: flex;
