@@ -34,6 +34,7 @@
 
           <div>
             <h3>개발자</h3>
+            <img style="max-width: 200px" src="/static/img/photos/louie.jpg" />
             <div class="contact">
               <span style="padding-right:0.5em">Kurt Lee</span><a href="mailto:breth103@gmail.com"><i class="material-icons">email</i></a>
             </div>
