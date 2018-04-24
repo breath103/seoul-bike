@@ -169,8 +169,8 @@ export default {
       });
   },
   mounted() {
-    console.log(window.google);
-    console.log(this.$refs.currentPositionMarker);
+    // console.log(window.google);
+    // console.log(this.$refs.currentPositionMarker);
 
     // setInterval(() => {
     //   if (this.$refs.currentPositionMarker) {

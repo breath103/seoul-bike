@@ -2,12 +2,12 @@
   <transition name="fade">
     <div class="about">
       <div class="backdrop"></div>
-      <div class="content">
+      <div class="content" @click="goBack()">
         <section>
           <div>
             <h2>도움말</h2>
             <p>
-              이 사이트는 서울시 자전거 <a href="https://www.bikeseoul.com"><b>따릉이</b></a> 를 위한 거치대 찾기 서비스 입니다.
+              이 사이트는 서울시 자전거 <a @click.stop href="https://www.bikeseoul.com"><b>따릉이</b></a> 를 위한 거치대 찾기 서비스 입니다.
             </p>
           </div>
 
@@ -28,7 +28,7 @@
             <h3>사용권</h3>
             <ul>
               <li>현재는 AWS와 Google Firebase를 통해 무료로 호스팅 되고 있어, 별도의 유지비용이 없기에 무료로 제공합니다.</li>
-              <li>이 사이트는 <a href="https://github.com/breath103/seoul-bike"><b>오픈소스</b></a>로 제공됩니다.</li>
+              <li>이 사이트는 <a @click.stop href="https://github.com/breath103/seoul-bike"><b>오픈소스</b></a>로 제공됩니다.</li>
             </ul>
           </div>
 
@@ -36,7 +36,7 @@
             <h3>개발자</h3>
             <img style="max-width: 200px" src="/static/img/photos/louie.jpg" />
             <div class="contact">
-              <span style="padding-right:0.5em">Kurt Lee</span><a href="mailto:breth103@gmail.com"><i class="material-icons">email</i></a>
+              <span style="padding-right:0.5em">Kurt Lee</span><a @click.stop href="mailto:breth103@gmail.com"><i class="material-icons">email</i></a>
             </div>
           </div>
 
@@ -51,7 +51,12 @@
 
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  methods: {
+    goBack() {
+      this.$router.push("/");
+    }
+  }
 }
 </script>
 
