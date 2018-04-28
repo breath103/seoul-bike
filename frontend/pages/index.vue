@@ -2,20 +2,20 @@
   <div id="app">
     <header>
       <div class="title">
-        <router-link to="/">Seoul Bike</router-link>
+        <nuxt-link to="/">Seoul Bike</nuxt-link>
       </div>
 
       <div style="flex: 1">
       </div>
 
       <div>
-        <router-link to="about">
+        <nuxt-link to="about">
           <i class="material-icons">help</i>
-        </router-link>
+        </nuxt-link>
       </div>
     </header>
     <main>
-      <router-view></router-view>
+      <nuxt-child />
     </main>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 html,
 body {
+  font-family: 'Nanum Gothic', sans-serif;
   height: 100%;
   width: 100%;
   margin: 0;

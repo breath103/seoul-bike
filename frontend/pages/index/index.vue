@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="map">
+    <div class="map" v-if="!ssr">
       <gmap-map
         ref="map"
         :center="mapCenter"
@@ -14,7 +14,7 @@
           :position="toGMapCoord(item.station.coordinate)"
           :clickable="true"
           :icon="{
-            url: '/static/img/icons/station.svg',
+            url: '/img/icons/station.svg',
           }"
           :label="{
             text: `${item.station.availableBikes}`,
@@ -29,7 +29,7 @@
           v-if="position"
           :position="position"
           :icon="{
-            url: '/static/img/icons/marker.svg',
+            url: '/img/icons/marker.svg',
             anchor: { x: 56, y: 56 }
           }"
         >
@@ -54,7 +54,7 @@
                 {{ position.lng.toFixed(4) }},
                 {{ position.lat.toFixed(4) }}
               </span>
-              <span v-if="!position">
+              <span v-else>
                 위치 확인중...
               </span>
             </div>
@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <router-view class="overlay" name="overlay"/>
+    <nuxt-child />
   </div>
 </template>
 
@@ -109,7 +109,6 @@ function getDistance(a, b) {
 }
 
 export default {
-  name: 'Home',
   created() {
     // UI setting
     this.focus = "map";
@@ -144,31 +143,35 @@ export default {
 
     // Start Updating Position
     let updateCount = 0;
-    navigator.geolocation.watchPosition(
-      (raw) => {
-        // console.log("RAW", raw);
-        const position = {
-          accuracy: raw.coords.accuracy,
-          lat: raw.coords.latitude,
-          lng: raw.coords.longitude,
-          speed: raw.coords.speed,
-        };
-        this.setLastPosition(position);
-        this.position = position;
+    if (typeof navigator !== 'undefined') {
+      navigator.geolocation.watchPosition(
+        (raw) => {
+          // console.log("RAW", raw);
+          const position = {
+            accuracy: raw.coords.accuracy,
+            lat: raw.coords.latitude,
+            lng: raw.coords.longitude,
+            speed: raw.coords.speed,
+          };
+          this.setLastPosition(position);
+          this.position = position;
 
-        if (updateCount === 0) {
-          // Move to currentPosition
-          this.mapCenter = this.position;
-        }
-        updateCount++;
-      }, (error) => {
-        // window.alert(`Error : ${JSON.stringify(error)}`);
-      }, {
-        enableHighAccuracy: false,
-        maximumAge: 30 * 1000,
-      });
+          if (updateCount === 0) {
+            // Move to currentPosition
+            this.mapCenter = this.position;
+          }
+          updateCount++;
+        }, (error) => {
+          // window.alert(`Error : ${JSON.stringify(error)}`);
+        }, {
+          enableHighAccuracy: false,
+          maximumAge: 30 * 1000,
+        });
+    }
+    this.ssr = true;
   },
   mounted() {
+    this.ssr = false;
     // console.log(window.google);
     // console.log(this.$refs.currentPositionMarker);
 
@@ -204,21 +207,29 @@ export default {
         coordinate
       );
     },
+
     setLastPosition(position) {
-      localStorage.setItem("Home-LastLocation-v4", JSON.stringify(position));
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("Home-LastLocation-v4", JSON.stringify(position));
+      }
     },
     getLastPosition() {
-      const raw = localStorage.getItem("Home-LastLocation-v4");
-      if (raw) {
-        try {
-          return JSON.parse(raw);
-        } catch (e) {
+      if (typeof localStorage !== "undefined") {
+        const raw = localStorage.getItem("Home-LastLocation-v4");
+        if (raw) {
+          try {
+            return JSON.parse(raw);
+          } catch (e) {
+            return null;
+          }
+        } else {
           return null;
         }
       } else {
         return null;
       }
     },
+
     activateMap() {
       this.focus = "map";
     },
@@ -280,6 +291,7 @@ export default {
   },
   data() {
     return {
+      ssr: this.ssr,
       focus: this.focus,
 
       position: this.position,
@@ -293,13 +305,22 @@ export default {
 
       stationsCloseToMapCenter: this.stationsCloseToMapCenter,
     }
+  },
+  head() {
+    return {
+      meta: [
+        { property: "og:url",
+          content: `${process.env.HOST}` },
+        { property: "og:type",
+          content: "article" },
+      ]
+    }
   }
 }
 </script>
 
 <style lang="scss">
 $highlightColor: #FF6E30;
-
 
 .map {
   position: absolute;
@@ -320,10 +341,6 @@ $highlightColor: #FF6E30;
   &.disable {
     pointer-events: none;
   }
-  &.active {
-
-  }
-  // background-color: rgba(0, 0, 0, 0.15);
 }
 
 .stationListTopMargin {
