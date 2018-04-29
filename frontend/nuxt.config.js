@@ -7,11 +7,11 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
-      { hid: 'description', name: '서울시 자전거 따릉이 거치대 찾기 서비스', content: 'Seoul Bike' },
+      { hid: 'description', name: '서울시 자전거 따릉이 대여소 찾기 서비스', content: 'Seoul Bike' },
       { property: "og:title",
         content: "Seoul Bike" },
       { property: "og:description",
-        content: "서울시 자전거 따릉이 거치대 찾기 서비스" },
+        content: "서울시 자전거 따릉이 대여소 찾기 서비스" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
       { name: "apple-mobile-web-app-title", content: "seoul-bike" },
