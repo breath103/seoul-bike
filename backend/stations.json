@@ -1,0 +1,343 @@
+{
+  "stations": [
+    {
+      "name": " 정동사거리",
+      "coordinate": {
+        "latitude": 37.56805,
+        "longitude": 126.969231
+      },
+      "availableBikes": 4
+    },
+    {
+      "name": " 청계광장 옆",
+      "coordinate": {
+        "latitude": 37.568878,
+        "longitude": 126.97747
+      },
+      "availableBikes": 6
+    },
+    {
+      "name": " 서울광장 옆",
+      "coordinate": {
+        "latitude": 37.566612,
+        "longitude": 126.97747
+      },
+      "availableBikes": 20
+    },
+    {
+      "name": " 시청역 1번출구 뒤",
+      "coordinate": {
+        "latitude": 37.564674,
+        "longitude": 126.976738
+      },
+      "availableBikes": 4
+    },
+    {
+      "name": " 서울역 광장 파출소 옆",
+      "coordinate": {
+        "latitude": 37.556961,
+        "longitude": 126.971771
+      },
+      "availableBikes": 3
+    },
+    {
+      "name": " 광교사거리 남측",
+      "coordinate": {
+        "latitude": 37.568527,
+        "longitude": 126.982552
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 을지로입구역 4번출구 앞",
+      "coordinate": {
+        "latitude": 37.566223,
+        "longitude": 126.983589
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " KEB 하나금융그룹 명동사옥 옆",
+      "coordinate": {
+        "latitude": 37.565464,
+        "longitude": 126.984138
+      },
+      "availableBikes": 5
+    },
+    {
+      "name": " 명동성당 앞",
+      "coordinate": {
+        "latitude": 37.564476,
+        "longitude": 126.986969
+      },
+      "availableBikes": 3
+    },
+    {
+      "name": " 신세계백화점 본점 앞",
+      "coordinate": {
+        "latitude": 37.56134,
+        "longitude": 126.9804
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 청계천 한빛광장",
+      "coordinate": {
+        "latitude": 37.568165,
+        "longitude": 126.984978
+      },
+      "availableBikes": 2
+    },
+    {
+      "name": " 을지로2가 사거리 북측",
+      "coordinate": {
+        "latitude": 37.566383,
+        "longitude": 126.987206
+      },
+      "availableBikes": 4
+    },
+    {
+      "name": " 을지로2가 사거리 남측",
+      "coordinate": {
+        "latitude": 37.56599,
+        "longitude": 126.987793
+      },
+      "availableBikes": 4
+    },
+    {
+      "name": " 티마크 호텔 앞",
+      "coordinate": {
+        "latitude": 37.562618,
+        "longitude": 126.992836
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 맥스타일 앞",
+      "coordinate": {
+        "latitude": 37.569183,
+        "longitude": 127.00988
+      },
+      "availableBikes": 6
+    },
+    {
+      "name": " 동대문역사문화공원역 9번출구 앞",
+      "coordinate": {
+        "latitude": 37.565331,
+        "longitude": 127.007843
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 동대입구역 6번출구 뒤",
+      "coordinate": {
+        "latitude": 37.558872,
+        "longitude": 127.005539
+      },
+      "availableBikes": 4
+    },
+    {
+      "name": " 약수역 3번출구 뒤",
+      "coordinate": {
+        "latitude": 37.554295,
+        "longitude": 127.0112
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 청구 어린이공원",
+      "coordinate": {
+        "latitude": 37.555859,
+        "longitude": 127.013855
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 청구역 2번출구 앞",
+      "coordinate": {
+        "latitude": 37.560474,
+        "longitude": 127.014076
+      },
+      "availableBikes": 8
+    },
+    {
+      "name": " 다산 어린이공원",
+      "coordinate": {
+        "latitude": 37.563717,
+        "longitude": 127.018425
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 청계7가 사거리",
+      "coordinate": {
+        "latitude": 37.569805,
+        "longitude": 127.016953
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 서울역9번출구",
+      "coordinate": {
+        "latitude": 37.556,
+        "longitude": 126.973358
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " CJ제일제당 앞",
+      "coordinate": {
+        "latitude": 37.563866,
+        "longitude": 127.002747
+      },
+      "availableBikes": 8
+    },
+    {
+      "name": " 장충체육관",
+      "coordinate": {
+        "latitude": 37.558533,
+        "longitude": 127.006989
+      },
+      "availableBikes": 3
+    },
+    {
+      "name": " 약수역 10번출구 앞",
+      "coordinate": {
+        "latitude": 37.555199,
+        "longitude": 127.010048
+      },
+      "availableBikes": 3
+    },
+    {
+      "name": " 신당역 12번 출구 뒤",
+      "coordinate": {
+        "latitude": 37.565849,
+        "longitude": 127.016403
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 종로학원본원 ",
+      "coordinate": {
+        "latitude": 37.55978,
+        "longitude": 126.968506
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 훈련원공원주차장 앞",
+      "coordinate": {
+        "latitude": 37.566994,
+        "longitude": 127.003464
+      },
+      "availableBikes": 10
+    },
+    {
+      "name": " 을지로4가역 1번출구",
+      "coordinate": {
+        "latitude": 37.56673,
+        "longitude": 126.996605
+      },
+      "availableBikes": 2
+    },
+    {
+      "name": " 충무로역 1번출구",
+      "coordinate": {
+        "latitude": 37.56139,
+        "longitude": 126.995354
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 정동길입구",
+      "coordinate": {
+        "latitude": 37.565437,
+        "longitude": 126.973305
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 을지로3가역 3번출구",
+      "coordinate": {
+        "latitude": 37.566559,
+        "longitude": 126.992439
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 서울역 센트럴 자이아파트",
+      "coordinate": {
+        "latitude": 37.554108,
+        "longitude": 126.965408
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 명보사거리",
+      "coordinate": {
+        "latitude": 37.5644,
+        "longitude": 126.991432
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 송도병원",
+      "coordinate": {
+        "latitude": 37.549889,
+        "longitude": 127.007347
+      },
+      "availableBikes": 2
+    },
+    {
+      "name": " KEB하나은행 장충동지점",
+      "coordinate": {
+        "latitude": 37.562172,
+        "longitude": 127.006264
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 청계천 영도교",
+      "coordinate": {
+        "latitude": 37.5709,
+        "longitude": 127.019524
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " 을지로입구역 2번출구",
+      "coordinate": {
+        "latitude": 37.566345,
+        "longitude": 126.982292
+      },
+      "availableBikes": 1
+    },
+    {
+      "name": " 신당 레미안 버스정류장",
+      "coordinate": {
+        "latitude": 37.561489,
+        "longitude": 127.023933
+      },
+      "availableBikes": 0
+    },
+    {
+      "name": " SK 남산빌딩",
+      "coordinate": {
+        "latitude": 37.556862,
+        "longitude": 126.975616
+      },
+      "availableBikes": 2
+    },
+    {
+      "name": " 서울역 서부교차로2",
+      "coordinate": {
+        "latitude": 37.555367,
+        "longitude": 126.968643
+      },
+      "availableBikes": 2
+    }
+  ],
+  "meta": {
+    "createdAt": 1557544136360
+  }
+}

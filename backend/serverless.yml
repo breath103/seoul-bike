@@ -19,6 +19,10 @@ package:
 functions:
   cron:
     handler: cron.handler
+    memorySize: 128
+    timeout: 15
+    environment:
+      DEBUG: Cron
     events:
       - schedule:
           rate: rate(5 minutes)
@@ -37,7 +41,7 @@ resources:
               AllowedOrigins:
                 - "*"
               MaxAge: 362000
-              
+
     AssetBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:

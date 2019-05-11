@@ -6,9 +6,17 @@ const logger = debug("Cron");
 const s3 = new AWS.S3();
 
 export async function handler() {
-  const response = await Axios.post("https://www.bikeseoul.com/app/station/getStationRealtimeStatus.do");
+  const response = await Axios.post(
+    "https://www.bikeseoul.com/app/station/getStationRealtimeStatus.do",
+    null,
+    {
+      params: {
+        stationGrpSeq: "ALL",
+      }
+    }
+  );
 
-  const stations = (response.data.realtimeList as any[])
+  const stations = (response.data.realtimeList as object[])
     .filter((s: any) => {
       return s.stationUseYn === "Y" &&
         Number(s.stationLatitude) !== 0 &&
@@ -29,7 +37,7 @@ export async function handler() {
       };
     });
 
-  logger("Stations: %O", stations.slice(0, 10));
+  logger("Stations: %d, %d", response.data.realtimeList.length, stations.length);
 
   await s3.putObject({
     Bucket: process.env.ASSET_BUCKET as string,
